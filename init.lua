@@ -539,6 +539,7 @@ local metals_config = require("metals").bare_config()
 metals_config.init_options.statusBarProvider = "on"
 
 vim.cmd.colorscheme "catppuccin"
+vim.opt.colorcolumn = "80"
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
