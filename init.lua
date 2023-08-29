@@ -441,7 +441,9 @@ end
 --  define the property 'filetypes' to the map in question.
 local servers = {
   -- clangd = {},
-  -- gopls = {},
+  gopls = {
+    cmd = {'gopls', '--remote=auto'}
+  },
   -- pyright = {},
   -- rust_analyzer = {},
   -- tsserver = {},
