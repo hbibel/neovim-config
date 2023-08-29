@@ -207,6 +207,8 @@ require('lazy').setup({
     }
   },
 
+  { 'github/copilot.vim' },
+
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --    You can use this folder to prevent any conflicts with this init.lua if you're interested in keeping
   --    up-to-date with whatever is in the kickstart repo.
@@ -537,6 +539,7 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 local metals_config = require("metals").bare_config()
 metals_config.init_options.statusBarProvider = "on"
+metals_config.on_attach = on_attach
 
 vim.cmd.colorscheme "catppuccin"
 vim.opt.colorcolumn = "80"
