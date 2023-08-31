@@ -135,6 +135,7 @@ require('lazy').setup({
   },
 
   { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
+  { "rose-pine/neovim", name = "rose-pine", priority = 1000 },
 
   {
     -- Set lualine as statusline
@@ -544,9 +545,14 @@ vim.api.nvim_create_autocmd("FileType", {
   group = nvim_metals_group,
 })
 
-vim.cmd.colorscheme "catppuccin"
+vim.cmd.colorscheme "rose-pine"
 vim.opt.colorcolumn = "80"
 vim.opt.tabstop = 2
+
+-- Open help in vertical split
+-- There's also a fancy plugin, but I don't need the fanciness now
+-- https://github.com/anuvyklack/help-vsplit.nvim
+vim.cmd("command! -nargs=1 Hlp rightbelow vert help <args>")
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
