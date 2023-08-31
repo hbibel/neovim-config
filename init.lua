@@ -59,6 +59,9 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+local function metals_status()
+   return vim.g["metals_status"] or ""
+end
 -- See nvim-metals help
 vim.opt_global.shortmess:remove("F")
 
@@ -148,6 +151,14 @@ require('lazy').setup({
         component_separators = '|',
         section_separators = '',
       },
+      sections = {
+        lualine_a = { 'mode' },
+        lualine_b = { 'branch', 'diff' },
+        lualine_c = { 'filename', metals_status },
+        lualine_x = { 'filetype' },
+        lualine_y = { 'progress' },
+        lualine_z = { 'location' }
+      },
     },
   },
 
@@ -207,6 +218,8 @@ require('lazy').setup({
       'nvim-lua/plenary.nvim'
     }
   },
+
+  { 'mfussenegger/nvim-dap' },
 
   { 'github/copilot.vim' },
 
@@ -405,6 +418,22 @@ local on_attach = function(_, bufnr)
     vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
   end
 
+  -- Notes on personal mappings
+  -- - [R]efactor
+  -- - [G]oto
+  -- - [C]reate
+  -- - [X]lose
+  -- - [O]pen
+  -- - [W]indow
+  --
+  nmap('<leader>xwo', function()
+    require('dap').repl.close()
+  end, '[Close] [W]indow: [O]utput')
+
+  nmap('<leader>owo', function()
+    require('dap').repl.open()
+  end, '[Open] [W]indow: [O]utput')
+
   nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
   nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
 
@@ -431,6 +460,8 @@ local on_attach = function(_, bufnr)
   vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
     vim.lsp.buf.format()
   end, { desc = 'Format current buffer with LSP' })
+
+  require("metals").setup_dap()
 end
 
 -- Enable the following language servers
