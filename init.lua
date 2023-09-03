@@ -60,7 +60,7 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 local function metals_status()
-   return vim.g["metals_status"] or ""
+  return vim.g["metals_status"] or ""
 end
 -- See nvim-metals help
 vim.opt_global.shortmess:remove("F")
@@ -78,7 +78,7 @@ require('lazy').setup({
   'tpope/vim-rhubarb',
 
   -- Detect tabstop and shiftwidth automatically
-  'tpope/vim-sleuth',
+--  'tpope/vim-sleuth',
 
   -- NOTE: This is where your plugins related to LSP can be installed.
   --  The configuration is done below. Search for lspconfig to find it below.
@@ -92,7 +92,7 @@ require('lazy').setup({
 
       -- Useful status updates for LSP
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-      { 'j-hui/fidget.nvim', tag = 'legacy', opts = {} },
+      { 'j-hui/fidget.nvim',       tag = 'legacy', opts = {} },
 
       -- Additional lua configuration, makes nvim stuff amazing!
       'folke/neodev.nvim',
@@ -130,15 +130,16 @@ require('lazy').setup({
         changedelete = { text = '~' },
       },
       on_attach = function(bufnr)
-        vim.keymap.set('n', '<leader>gp', require('gitsigns').prev_hunk, { buffer = bufnr, desc = '[G]o to [P]revious Hunk' })
+        vim.keymap.set('n', '<leader>gp', require('gitsigns').prev_hunk,
+          { buffer = bufnr, desc = '[G]o to [P]revious Hunk' })
         vim.keymap.set('n', '<leader>gn', require('gitsigns').next_hunk, { buffer = bufnr, desc = '[G]o to [N]ext Hunk' })
         vim.keymap.set('n', '<leader>ph', require('gitsigns').preview_hunk, { buffer = bufnr, desc = '[P]review [H]unk' })
       end,
     },
   },
 
-  { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
-  { "rose-pine/neovim", name = "rose-pine", priority = 1000 },
+  { "catppuccin/nvim",      name = "catppuccin", priority = 1000 },
+  { "rose-pine/neovim",     name = "rose-pine",  priority = 1000 },
 
   {
     -- Set lualine as statusline
@@ -222,6 +223,22 @@ require('lazy').setup({
   { 'mfussenegger/nvim-dap' },
 
   { 'github/copilot.vim' },
+
+  {
+    "ray-x/go.nvim",
+    dependencies = { -- optional packages
+      "ray-x/guihua.lua",
+      "neovim/nvim-lspconfig",
+      "nvim-treesitter/nvim-treesitter",
+    },
+    config = function()
+      require("go").setup({
+        max_line_len = 79,
+      })
+    end,
+    event = { "CmdlineEnter" },
+    ft = { "go", 'gomod' },
+  },
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --    You can use this folder to prevent any conflicts with this init.lua if you're interested in keeping
@@ -478,7 +495,7 @@ end
 local servers = {
   -- clangd = {},
   gopls = {
-    cmd = {'gopls', '--remote=auto'}
+    cmd = { 'gopls', '--remote=auto' }
   },
   -- pyright = {},
   -- rust_analyzer = {},
