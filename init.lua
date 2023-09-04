@@ -504,6 +504,7 @@ vim.api.nvim_create_autocmd("FileType", {
 vim.cmd.colorscheme "catppuccin"
 vim.opt.colorcolumn = "80"
 vim.opt.tabstop = 2
+vim.opt.shiftwidth = 2
 
 -- Open help in vertical split
 -- There's also a fancy plugin, but I don't need the fanciness now
