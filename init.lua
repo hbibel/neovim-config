@@ -78,7 +78,7 @@ require('lazy').setup({
   'tpope/vim-rhubarb',
 
   -- Detect tabstop and shiftwidth automatically
---  'tpope/vim-sleuth',
+  --  'tpope/vim-sleuth',
 
   -- NOTE: This is where your plugins related to LSP can be installed.
   --  The configuration is done below. Search for lspconfig to find it below.
@@ -444,6 +444,7 @@ local on_attach = function(_, bufnr)
   -- - [E]xecute
   -- - [W]indow
   --
+  -- TODO fw -> format and write
   nmap('<leader>xwo', function()
     require('dap').repl.close()
   end, '[Close] [W]indow: [O]utput')
@@ -456,7 +457,10 @@ local on_attach = function(_, bufnr)
   nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
 
   nmap('gd', vim.lsp.buf.definition, '[G]oto [D]efinition')
-  nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
+  nmap('gr', vim.lsp.buf.references, '[G]oto [R]eferences')
+  -- This was defined in kickstart, but it at least doesn't work in
+  -- nvim-metals:
+  --nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
   nmap('gI', vim.lsp.buf.implementation, '[G]oto [I]mplementation')
   nmap('<leader>D', vim.lsp.buf.type_definition, 'Type [D]efinition')
   nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
@@ -482,6 +486,54 @@ local on_attach = function(_, bufnr)
   end, { desc = 'Format current buffer with LSP' })
 
   require("metals").setup_dap()
+
+  nmap("<leader>dc", require("dap").continue)
+  require("dap").configurations.scala = {
+    {
+      type = "scala",
+      request = "launch",
+      name = "Run file",
+      metals = {
+        runType = "runOrTestFile",
+      },
+    },
+    {
+      type = "scala",
+      request = "launch",
+      name = "Run with local environment",
+      metals = {
+        runType = "runOrTestFile",
+        envFile = ".env.local",
+      },
+    },
+    {
+      type = "scala",
+      request = "launch",
+      name = "Run or Test",
+      metals = {
+        runType = "runOrTestFile",
+      },
+    },
+    {
+      type = "scala",
+      request = "launch",
+      name = "Test Target",
+      metals = {
+        runType = "testTarget",
+      },
+    }
+  }
+  nmap('<leader>rf', function()
+    require('dap').run({
+      type = "scala",
+      request = "launch",
+      name = "Run with local environment",
+      metals = {
+        runType = "runOrTestFile",
+        envFile = ".env.local",
+      },
+    })
+  end, '[R]un [F]ile')
 end
 
 -- Enable the following language servers
@@ -604,6 +656,12 @@ vim.opt.tabstop = 2
 -- There's also a fancy plugin, but I don't need the fanciness now
 -- https://github.com/anuvyklack/help-vsplit.nvim
 vim.cmd("command! -nargs=1 Hlp rightbelow vert help <args>")
+
+--require("dap").adapters.scala = {
+--  type = "executable",
+--  command = "sbt",
+--  args = { "-jvm-debug", "5005" },
+--}
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
