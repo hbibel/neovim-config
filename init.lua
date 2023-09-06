@@ -313,7 +313,7 @@ vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous dia
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
 -- vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
-
+vim.keymap.set('n', '|', ':Neotree reveal<cr>', { desc = 'Reveal current file in Neotree' })
 -- [[ Configure LSP ]]
 --  This function gets run when an LSP connects to a particular buffer.
 local on_attach = function(_, bufnr)
@@ -494,7 +494,7 @@ metals_config.init_options.statusBarProvider = "on"
 metals_config.on_attach = on_attach
 local nvim_metals_group = vim.api.nvim_create_augroup("nvim-metals", { clear = true })
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = { "scala", "sbt" },
+  pattern = { "scala", "sbt", "java" },
   callback = function()
     require("metals").initialize_or_attach(metals_config)
   end,
