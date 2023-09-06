@@ -1,7 +1,18 @@
 M = {}
 
+-- Comment.nvim predefines
+-- [normal mode] `gcc` - Toggles the current line using linewise comment
+-- [normal mode] `gbc` - Toggles the current line using blockwise comment
+-- [normal mode] `[count]gcc` - Toggles the number of line given as a prefix-count using linewise
+-- [normal mode] `[count]gbc` - Toggles the number of line given as a prefix-count using blockwise
+-- [normal mode] `gc[count]{motion}` - (Op-pending) Toggles the region using linewise comment
+-- [normal mode] `gb[count]{motion}` - (Op-pending) Toggles the region using blockwise comment
+-- [visual mode] `gc` - Toggles the region using linewise comment
+-- [visual mode] `gb` - Toggles the region using blockwise comment
+
 M.basic = function()
 	vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
+	vim.keymap.set({ 'n', 'v' }, '<C-e>', '4<C-e><CR>')
 
 	-- Remap for dealing with word wrap
 	vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
@@ -10,7 +21,6 @@ M.basic = function()
 	vim.keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles, { desc = '[?] Find recently opened files' })
 	vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers, { desc = '[ ] Find existing buffers' })
 	vim.keymap.set('n', '<leader>/', function()
-		-- You can pass additional configuration to telescope to change theme, layout, etc.
 		require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
 			winblend = 10,
 			previewer = false,
@@ -23,18 +33,6 @@ M.basic = function()
 	vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
 	vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
 	vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
-
-	-- ### KEYMAPS ###
-
-	-- Comment.nvim predefines
-	-- [normal mode] `gcc` - Toggles the current line using linewise comment
-	-- [normal mode] `gbc` - Toggles the current line using blockwise comment
-	-- [normal mode] `[count]gcc` - Toggles the number of line given as a prefix-count using linewise
-	-- [normal mode] `[count]gbc` - Toggles the number of line given as a prefix-count using blockwise
-	-- [normal mode] `gc[count]{motion}` - (Op-pending) Toggles the region using linewise comment
-	-- [normal mode] `gb[count]{motion}` - (Op-pending) Toggles the region using blockwise comment
-	-- [visual mode] `gc` - Toggles the region using linewise comment
-	-- [visual mode] `gb` - Toggles the region using blockwise comment
 
 	-- Diagnostic keymaps
 	vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })

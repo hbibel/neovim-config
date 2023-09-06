@@ -138,9 +138,4 @@ return require('lazy').setup({
 	scala.plugins,
 	go.plugins,
 
-	-- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
-	--    Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
-	--
-	--    For additional information see: https://github.com/folke/lazy.nvim#-structuring-your-plugins
-	-- { import = 'custom.plugins' },
 }, {})

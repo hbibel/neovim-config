@@ -6,13 +6,14 @@ require('custom.plugins')
 require('custom.vimconfigs')
 
 local scala = require('custom.scala')
--- local go = require('custom.go')
 local keymaps = require('custom.keymaps')
 keymaps.basic()
 
 require('custom.commands').basic()
 
 local lsp = require('custom.lsp')
+lsp.setup()
+-- Scala (Metals) does some extra stuff to normal LSPs
 scala.init(lsp.on_attach)
 
 vim.cmd.colorscheme "catppuccin"
