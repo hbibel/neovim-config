@@ -42,4 +42,5 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 
 vim.opt.colorcolumn = "80"
 vim.opt.tabstop = 2
+vim.opt.expandtab = true
 vim.opt.shiftwidth = 2
