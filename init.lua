@@ -10,6 +10,7 @@ local keymaps = require('custom.keymaps')
 keymaps.basic()
 
 require('custom.commands').basic()
+require('custom.plugins.toggleterm')
 
 local lsp = require('custom.lsp')
 lsp.setup()

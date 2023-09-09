@@ -135,6 +135,8 @@ return require('lazy').setup({
     }
   },
 
+  { 'akinsho/toggleterm.nvim', version = "*", config = true },
+
   scala.plugins,
   go.plugins,
 
