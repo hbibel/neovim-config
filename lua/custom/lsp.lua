@@ -19,9 +19,9 @@ local on_attach = function(_, bufnr)
 end
 
 local servers = {
-  -- gopls = {
-  -- 	cmd = { 'gopls', '--remote=auto' }
-  -- },
+  gopls = {
+    filetypes = { 'go', 'gomod', },
+  },
   -- pyright = {},
   lua_ls = {
     Lua = {
@@ -38,9 +38,10 @@ local setup = function()
   local capabilities = vim.lsp.protocol.make_client_capabilities()
   capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
+  require('mason').setup()
+
   -- Ensure the servers above are installed
   local mason_lspconfig = require 'mason-lspconfig'
-
   mason_lspconfig.setup {
     ensure_installed = vim.tbl_keys(servers),
   }
@@ -50,7 +51,7 @@ local setup = function()
       require('lspconfig')[server_name].setup {
         capabilities = capabilities,
         on_attach = on_attach,
-        settings = servers[server_name],
+        settings = (servers[server_name] or {}).settings,
         filetypes = (servers[server_name] or {}).filetypes,
       }
     end

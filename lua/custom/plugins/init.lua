@@ -1,5 +1,4 @@
 local scala = require('custom.scala')
-local go = require('custom.go')
 
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 if not vim.loop.fs_stat(lazypath) then
@@ -138,6 +137,5 @@ return require('lazy').setup({
   { 'akinsho/toggleterm.nvim', version = "*", config = true },
 
   scala.plugins,
-  go.plugins,
 
 }, {})
