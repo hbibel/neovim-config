@@ -2,6 +2,13 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
+-- Sort order
+-- 1. non-dot directories
+-- 2. non-dot files
+-- 3. dot files
+-- 4. dot directories
+vim.g.netrw_sort_sequence = "^[^\\.].*[\\/]$,*,^\\..*[^/]$,\\..*\\/$"
+
 require('custom.plugins')
 require('custom.vimconfigs')
 
