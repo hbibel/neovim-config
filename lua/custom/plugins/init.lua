@@ -136,6 +136,11 @@ return require('lazy').setup({
 
   { 'akinsho/toggleterm.nvim', version = "*", config = true },
 
+  {
+    "cbochs/grapple.nvim",
+    dependencies = { "nvim-lua/plenary.nvim" },
+  },
+
   scala.plugins,
 
 }, {})
