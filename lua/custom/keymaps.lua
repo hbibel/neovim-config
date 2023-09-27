@@ -12,7 +12,8 @@ M = {}
 
 M.basic = function()
   vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
-  vim.keymap.set({ 'n', 'v' }, '<C-e>', '4<C-e><CR>')
+  vim.keymap.set({ 'n', 'v' }, '<C-e>', '4<C-e>')
+  vim.keymap.set({ 'n', 'v' }, '<C-y>', '4<C-y>')
 
   -- Remap for dealing with word wrap
   vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
