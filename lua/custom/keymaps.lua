@@ -80,7 +80,7 @@ function M.lsp(bufnr)
   nmap("gpt", "<cmd>lua require('goto-preview').goto_preview_type_definition()<CR>", '[G]oto [P]review [T]ype definition')
   nmap("gpi", "<cmd>lua require('goto-preview').goto_preview_implementation()<CR>", '[G]oto [P]review [I]mplementation')
   nmap("gpr", "<cmd>lua require('goto-preview').goto_preview_references()<CR>", '[G]oto [P]review [R]eferences')
-  nmap("xp", "<cmd>lua require('goto-preview').close_all_win()<CR>", 'Close [P]review windows')
+  nmap("<leader>xp", "<cmd>lua require('goto-preview').close_all_win()<CR>", 'Close [P]review windows')
 
   nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
   nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
