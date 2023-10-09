@@ -63,8 +63,8 @@ function M.lsp(bufnr)
     vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
   end
 
-  nmap('<leader>xwo', require('dap').repl.close, '[Close] [W]indow: [O]utput')
-  nmap('<leader>owo', require('dap').repl.open, '[Open] [W]indow: [O]utput')
+  nmap('<leader>xo', require('dap').repl.close, '[Close] [O]utput')
+  nmap('<leader>oo', require('dap').repl.open, '[Open] [O]utput')
 
   nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
   nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
@@ -75,6 +75,12 @@ function M.lsp(bufnr)
   nmap('<leader>D', vim.lsp.buf.type_definition, 'Type [D]efinition')
   nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
   nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
+
+  nmap("gpd", "<cmd>lua require('goto-preview').goto_preview_definition()<CR>", '[G]oto [P]review [D]efinition')
+  nmap("gpt", "<cmd>lua require('goto-preview').goto_preview_type_definition()<CR>", '[G]oto [P]review [T]ype definition')
+  nmap("gpi", "<cmd>lua require('goto-preview').goto_preview_implementation()<CR>", '[G]oto [P]review [I]mplementation')
+  nmap("gpr", "<cmd>lua require('goto-preview').goto_preview_references()<CR>", '[G]oto [P]review [R]eferences')
+  nmap("xp", "<cmd>lua require('goto-preview').close_all_win()<CR>", 'Close [P]review windows')
 
   nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
   nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')

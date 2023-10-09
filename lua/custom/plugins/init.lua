@@ -141,6 +141,8 @@ return require('lazy').setup({
     dependencies = { "nvim-lua/plenary.nvim" },
   },
 
+  { 'rmagatti/goto-preview',   opts = {} },
+
   scala.plugins,
 
 }, {})
