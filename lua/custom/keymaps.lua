@@ -65,6 +65,14 @@ function M.lsp(bufnr)
 
   nmap('<leader>xo', require('dap').repl.close, '[Close] [O]utput')
   nmap('<leader>oo', require('dap').repl.open, '[Open] [O]utput')
+  nmap("<F5>", require("dap").continue)
+  nmap("<F4>", require("dap").toggle_breakpoint)
+  nmap("<F6>", require("dap").step_over)
+  nmap("<F7>", require("dap").step_into)
+  nmap("<F8>", require("dap").step_out)
+  vim.keymap.set({ 'n', 'v' }, "<F2>", require('dap.ui.widgets').hover)
+  vim.keymap.set({ 'n', 'v' }, "<F3>", require('dap.ui.widgets').preview)
+  nmap("<F9>", require("dap").repl.open)
 
   nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
   nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
@@ -93,8 +101,6 @@ function M.lsp(bufnr)
   end, '[W]orkspace [L]ist Folders')
 
   nmap('<C-l>', vim.lsp.codelens.run, '[E]xecute [L]ens action')
-
-  nmap("<leader>dc", require("dap").continue)
 end
 
 function M.scala(bufnr)

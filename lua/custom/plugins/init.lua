@@ -13,6 +13,8 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+require('custom.plugins.dap')
+
 return require('lazy').setup({
   'tpope/vim-fugitive',
   'tpope/vim-rhubarb',
