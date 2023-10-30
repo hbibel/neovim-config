@@ -123,10 +123,7 @@ return require('lazy').setup({
     end,
   },
 
-  require 'kickstart.plugins.autoformat',
-
   { 'mfussenegger/nvim-dap' },
-  -- require 'kickstart.plugins.debug',
 
   { 'github/copilot.vim' },
 
@@ -148,6 +145,12 @@ return require('lazy').setup({
   },
 
   { 'rmagatti/goto-preview',   opts = {} },
+
+  {
+    'stevearc/conform.nvim',
+    opts = {},
+    config = require('custom.plugins.conform').setup,
+  },
 
   scala.plugins,
 
