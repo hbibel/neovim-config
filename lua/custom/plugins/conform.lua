@@ -12,6 +12,7 @@ return {
         -- Scalafmt standalone is SLOOOOOOOOW, so we fallback to LSP formatting
         -- scala = { "scalafmt" },
         -- Go LSP formatting is fine for now, so no explicit config here
+        html = { "djlint" },
       },
     })
   end
