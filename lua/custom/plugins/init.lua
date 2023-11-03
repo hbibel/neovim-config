@@ -92,7 +92,7 @@ return require('lazy').setup({
     end,
   },
 
-  { 'numToStr/Comment.nvim', opts = {} },
+  { 'numToStr/Comment.nvim',     opts = {} },
 
   {
     'nvim-telescope/telescope.nvim',
@@ -122,6 +122,7 @@ return require('lazy').setup({
       require('custom.plugins.treesitter').setup()
     end,
   },
+  { "nvim-treesitter/playground" },
 
   { 'mfussenegger/nvim-dap' },
 
