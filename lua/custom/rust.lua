@@ -1,0 +1,20 @@
+local M = {}
+
+M.init = function()
+  local rt = require("rust-tools")
+  rt.setup({
+    server = {
+      on_attach = function(_, bufnr)
+        vim.keymap.set(
+          "n",
+          "<C-space>",
+          rt.hover_actions.hover_actions,
+          { buffer = bufnr }
+        )
+        require("custom.keymaps").lsp(bufnr)
+      end,
+    },
+  })
+end
+
+return M

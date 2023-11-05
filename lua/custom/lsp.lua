@@ -29,6 +29,7 @@ local servers = {
       telemetry = { enable = false },
     },
   },
+  rust_analyzer = {},
 }
 
 local setup = function()

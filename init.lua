@@ -13,6 +13,7 @@ require('custom.plugins')
 require('custom.vimconfigs')
 
 local scala = require('custom.scala')
+local rust = require('custom.rust')
 local keymaps = require('custom.keymaps')
 keymaps.basic()
 
@@ -23,6 +24,7 @@ local lsp = require('custom.lsp')
 lsp.setup()
 -- Scala (Metals) does some extra stuff to normal LSPs
 scala.init(lsp.on_attach)
+rust.init()
 
 require("tokyonight").setup({ style = "night" })
 vim.cmd.colorscheme "tokyonight"
