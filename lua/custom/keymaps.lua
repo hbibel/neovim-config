@@ -63,6 +63,7 @@ function M.lsp(bufnr)
     vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
   end
 
+  -- DAP
   nmap('<leader>xo', require('dap').repl.close, '[Close] [O]utput')
   nmap('<leader>oo', require('dap').repl.open, '[Open] [O]utput')
   nmap("<F5>", require("dap").continue)
@@ -74,13 +75,20 @@ function M.lsp(bufnr)
   vim.keymap.set({ 'n', 'v' }, "<F3>", require('dap.ui.widgets').preview)
   nmap("<F9>", require("dap").repl.open)
 
+  -- Basic code editing
   nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
   nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
+  vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
+  vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
+  vim.keymap.set("v", "H", "<gv")
+  vim.keymap.set("v", "L", ">gv")
 
+  -- Navigation
   nmap('gd', vim.lsp.buf.definition, '[G]oto [D]efinition')
   nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
   nmap('gI', vim.lsp.buf.implementation, '[G]oto [I]mplementation')
   nmap('<leader>D', vim.lsp.buf.type_definition, 'Type [D]efinition')
+  nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
   nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
   nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
 
@@ -90,10 +98,10 @@ function M.lsp(bufnr)
   nmap("gpr", "<cmd>lua require('goto-preview').goto_preview_references()<CR>", '[G]oto [P]review [R]eferences')
   nmap("<leader>xp", "<cmd>lua require('goto-preview').close_all_win()<CR>", 'Close [P]review windows')
 
+  -- Misc
   nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
   nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
 
-  nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
   nmap('<leader>wa', vim.lsp.buf.add_workspace_folder, '[W]orkspace [A]dd Folder')
   nmap('<leader>wr', vim.lsp.buf.remove_workspace_folder, '[W]orkspace [R]emove Folder')
   nmap('<leader>wl', function()
@@ -101,6 +109,13 @@ function M.lsp(bufnr)
   end, '[W]orkspace [L]ist Folders')
 
   nmap('<C-l>', vim.lsp.codelens.run, '[E]xecute [L]ens action')
+end
+
+function M.python(bufnr)
+  -- require('telescope.builtin').lsp_references doesn't work in Pyright
+  -- unfortunately
+  vim.keymap.set('n', 'gr', vim.lsp.buf.references,
+    { buffer = bufnr, desc = '[G]oto [R]eferences' })
 end
 
 function M.scala(bufnr)

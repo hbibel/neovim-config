@@ -16,6 +16,10 @@ local on_attach = function(_, bufnr)
       keymaps.scala(bufnr)
     end
   end
+
+  if file_type == 'python' then
+    keymaps.python(bufnr)
+  end
 end
 
 local servers = {
