@@ -26,7 +26,15 @@ lsp.setup()
 scala.init(lsp.on_attach)
 rust.init()
 
-require("tokyonight").setup({ style = "night" })
+require("tokyonight").setup {
+  transparent = true,
+  styles = {
+    sidebars = "transparent",
+    floats = "transparent",
+  },
+  on_colors = function(_) end,
+  on_highlights = function(_, _) end,
+}
 vim.cmd.colorscheme "tokyonight"
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et

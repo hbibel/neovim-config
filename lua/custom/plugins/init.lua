@@ -157,4 +157,12 @@ return require('lazy').setup({
 
   { 'simrat39/rust-tools.nvim' },
 
+  -- looks nicer than vim.opt.colorcolumn = "80"
+  {
+    "lukas-reineke/virt-column.nvim",
+    opts = {
+      virtcolumn = '80',
+    }
+  },
+
 }, {})
