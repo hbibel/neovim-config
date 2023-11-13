@@ -36,5 +36,9 @@ require("tokyonight").setup {
   on_highlights = function(_, _) end,
 }
 vim.cmd.colorscheme "tokyonight"
+
+-- import init_workspace.lua, if it exists
+pcall(require, 'init_workspace')
+
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
