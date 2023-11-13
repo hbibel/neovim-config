@@ -67,13 +67,16 @@ function M.lsp(bufnr)
   nmap('<leader>xo', require('dap').repl.close, '[Close] [O]utput')
   nmap('<leader>oo', require('dap').repl.open, '[Open] [O]utput')
   nmap("<F5>", require("dap").continue)
+  nmap("<F10>", require("dap").close)
   nmap("<F4>", require("dap").toggle_breakpoint)
   nmap("<F6>", require("dap").step_over)
   nmap("<F7>", require("dap").step_into)
   nmap("<F8>", require("dap").step_out)
   vim.keymap.set({ 'n', 'v' }, "<F2>", require('dap.ui.widgets').hover)
   vim.keymap.set({ 'n', 'v' }, "<F3>", require('dap.ui.widgets').preview)
-  nmap("<F9>", require("dap").repl.open)
+  nmap("<F9>", require("dapui").toggle)
+  -- Without dap-ui:
+  -- nmap("<F9>", require("dap").repl.open)
 
   -- Basic code editing
   nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
@@ -116,6 +119,8 @@ function M.python(bufnr)
   -- unfortunately
   vim.keymap.set('n', 'gr', vim.lsp.buf.references,
     { buffer = bufnr, desc = '[G]oto [R]eferences' })
+  vim.keymap.set("v", "<leader>F5", require('dap-python').debug_selection(),
+    { buffer = bufnr, desc = "Debug selected range" })
 end
 
 function M.scala(bufnr)

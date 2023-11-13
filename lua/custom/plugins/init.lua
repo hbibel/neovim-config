@@ -124,7 +124,23 @@ return require('lazy').setup({
   },
   { "nvim-treesitter/playground" },
 
-  { 'mfussenegger/nvim-dap' },
+  { "mfussenegger/nvim-dap" },
+  {
+    "mfussenegger/nvim-dap-python",
+    dependencies = {
+      "mfussenegger/nvim-dap",
+    },
+    config = function()
+      require("dap-python").setup("~/software/debugpy/bin/python")
+    end,
+  },
+  {
+    "rcarriga/nvim-dap-ui",
+    dependencies = {
+      "mfussenegger/nvim-dap",
+    },
+    config = function() require("dapui").setup() end
+  },
 
   { 'github/copilot.vim' },
 
