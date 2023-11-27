@@ -15,6 +15,12 @@ M.basic = function()
   vim.keymap.set({ 'n', 'v' }, '<C-e>', '4<C-e>')
   vim.keymap.set({ 'n', 'v' }, '<C-y>', '4<C-y>')
 
+  -- Basic text editing
+  vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
+  vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
+  vim.keymap.set("v", "H", "<gv")
+  vim.keymap.set("v", "L", ">gv")
+
   -- Remap for dealing with word wrap
   vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
   vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
@@ -46,12 +52,12 @@ M.basic = function()
   vim.keymap.set('n', '<leader>geu', require('grapple').untag, { desc = '[G]rappl[e] [U]ntag' })
   vim.keymap.set('n', '<leader>geg', require('grapple').popup_tags, { desc = '[G]rappl[e] [G]o to tag' })
   -- easier navigation out of a terminal
-  -- vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], { buffer = 0 })
-  -- vim.keymap.set('t', '<C-h>', [[<Cmd>wincmd h<CR>]], { buffer = 0 })
-  -- vim.keymap.set('t', '<C-j>', [[<Cmd>wincmd j<CR>]], { buffer = 0 })
-  -- vim.keymap.set('t', '<C-k>', [[<Cmd>wincmd k<CR>]], { buffer = 0 })
-  -- vim.keymap.set('t', '<C-l>', [[<Cmd>wincmd l<CR>]], { buffer = 0 })
-  -- vim.keymap.set('t', '<C-w>', [[<C-\><C-n><C-w>]], { buffer = 0 })
+  vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], { buffer = 0 })
+  vim.keymap.set('t', '<C-h>', [[<Cmd>wincmd h<CR>]], { buffer = 0 })
+  vim.keymap.set('t', '<C-j>', [[<Cmd>wincmd j<CR>]], { buffer = 0 })
+  vim.keymap.set('t', '<C-k>', [[<Cmd>wincmd k<CR>]], { buffer = 0 })
+  vim.keymap.set('t', '<C-l>', [[<Cmd>wincmd l<CR>]], { buffer = 0 })
+  vim.keymap.set('t', '<C-w>', [[<C-\><C-n><C-w>]], { buffer = 0 })
 end
 
 function M.lsp(bufnr)
@@ -67,6 +73,7 @@ function M.lsp(bufnr)
   nmap('<leader>xo', require('dap').repl.close, '[Close] [O]utput')
   nmap('<leader>oo', require('dap').repl.open, '[Open] [O]utput')
   nmap("<F5>", require("dap").continue)
+  nmap("<leader><F5>", require("dap").terminate)
   nmap("<F10>", require("dap").close)
   nmap("<F4>", require("dap").toggle_breakpoint)
   nmap("<F6>", require("dap").step_over)
@@ -78,13 +85,9 @@ function M.lsp(bufnr)
   -- Without dap-ui:
   -- nmap("<F9>", require("dap").repl.open)
 
-  -- Basic code editing
+  -- LSP aware code editing
   nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
   nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
-  vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
-  vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
-  vim.keymap.set("v", "H", "<gv")
-  vim.keymap.set("v", "L", ">gv")
 
   -- Navigation
   nmap('gd', vim.lsp.buf.definition, '[G]oto [D]efinition')
