@@ -14,6 +14,7 @@ require('custom.vimconfigs')
 
 local scala = require('custom.scala')
 local rust = require('custom.rust')
+local python = require('custom.python')
 local keymaps = require('custom.keymaps')
 keymaps.basic()
 
@@ -25,6 +26,7 @@ lsp.setup()
 -- Scala (Metals) does some extra stuff to normal LSPs
 scala.init(lsp.on_attach)
 rust.init()
+python.init()
 
 require("tokyonight").setup {
   transparent = true,
