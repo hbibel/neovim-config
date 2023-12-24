@@ -16,7 +16,9 @@ M.init = function()
           rt.hover_actions.hover_actions,
           { buffer = bufnr }
         )
-        require("custom.keymaps").lsp(bufnr)
+        local km = require("custom.keymaps")
+        km.lsp(bufnr)
+        km.rust(bufnr)
       end,
     },
     dap = {

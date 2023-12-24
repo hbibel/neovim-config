@@ -133,4 +133,8 @@ function M.scala(bufnr)
     { buffer = bufnr, desc = '[G]oto [R]eferences' })
 end
 
+function M.rust(bufnr)
+  vim.keymap.set('i', '{', '{<CR>}<Esc>O', { buffer = bufnr })
+end
+
 return M
