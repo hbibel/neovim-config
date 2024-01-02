@@ -3,6 +3,9 @@ local function basic()
   -- There's also a fancy plugin, but I don't need the fanciness now
   -- https://github.com/anuvyklack/help-vsplit.nvim
   vim.cmd("command! -nargs=1 Hlp rightbelow vert help <args>")
+
+  -- I can't type
+  vim.cmd("command! -nargs=1 W w <args>")
 end
 
 local function lsp(bufnr)
