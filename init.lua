@@ -28,16 +28,14 @@ scala.init(lsp.on_attach)
 rust.init()
 python.init()
 
-require("tokyonight").setup {
-  transparent = true,
-  styles = {
-    sidebars = "transparent",
-    floats = "transparent",
-  },
-  on_colors = function(_) end,
-  on_highlights = function(_, _) end,
-}
-vim.cmd.colorscheme "tokyonight"
+local group = vim.api.nvim_create_augroup('OverrideMelange', {})
+vim.api.nvim_create_autocmd('ColorScheme', {
+  pattern = 'melange',
+  callback = function() vim.api.nvim_set_hl(0, 'Normal', { bg = 'NONE' }) end,
+  group = group,
+})
+vim.opt.termguicolors = true
+vim.cmd.colorscheme "melange"
 
 -- import init_workspace.lua, if it exists
 pcall(require, 'init_workspace')

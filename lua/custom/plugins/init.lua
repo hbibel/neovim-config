@@ -61,6 +61,7 @@ return require('lazy').setup({
   { "catppuccin/nvim",       name = "catppuccin", priority = 1000 },
   { "rose-pine/neovim",      name = "rose-pine",  priority = 1000 },
   { "folke/tokyonight.nvim", name = "tokyonight", lazy = false,   priority = 1000 },
+  { "savq/melange-nvim" },
 
   {
     'nvim-lualine/lualine.nvim',
