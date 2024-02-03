@@ -170,6 +170,12 @@ return require('lazy').setup({
     config = require('custom.plugins.conform').setup,
   },
 
+  {
+    "mfussenegger/nvim-lint",
+    opts = {},
+    config = require("custom.plugins.nvim-lint").setup,
+  },
+
   scala.plugins,
 
   { 'simrat39/rust-tools.nvim' },

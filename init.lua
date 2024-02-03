@@ -26,7 +26,7 @@ lsp.setup()
 -- Scala (Metals) does some extra stuff to normal LSPs
 scala.init(lsp.on_attach)
 rust.init()
-python.init()
+python.init(lsp.on_attach)
 
 local group = vim.api.nvim_create_augroup('OverrideMelange', {})
 vim.api.nvim_create_autocmd('ColorScheme', {

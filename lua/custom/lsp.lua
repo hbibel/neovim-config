@@ -26,7 +26,6 @@ local servers = {
   gopls = {
     filetypes = { 'go', 'gomod', },
   },
-  pyright = {},
   lua_ls = {
     Lua = {
       workspace = { checkThirdParty = false },
