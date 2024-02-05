@@ -26,6 +26,7 @@ local servers = {
   gopls = {
     filetypes = { 'go', 'gomod', },
   },
+  jedi_language_server = {},
   lua_ls = {
     Lua = {
       workspace = { checkThirdParty = false },
