@@ -13,6 +13,11 @@ return {
         -- scala = { "scalafmt" },
         -- Go LSP formatting is fine for now, so no explicit config here
         html = { "djlint" },
+        javascript = { "prettier" },
+        javascriptreact = { "prettier" },
+        typescript = { "prettier" },
+        typescriptreact = { "prettier" },
+        astro = { "prettier" },
       },
     })
   end
