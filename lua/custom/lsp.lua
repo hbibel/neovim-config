@@ -36,6 +36,7 @@ local servers = {
   rust_analyzer = {},
   tsserver = {},
   astro = {},
+  marksman = {},
 }
 
 local setup = function()
