@@ -1,5 +1,7 @@
 local M = {}
 
+-- TODO rust-tools is archived, migrate to https://github.com/mrcjkb/rustaceanvim
+
 M.init = function()
   local rt = require("rust-tools")
 
@@ -20,6 +22,15 @@ M.init = function()
         km.lsp(bufnr)
         km.rust(bufnr)
       end,
+      settings = {
+        ["rust-analyzer"] = {
+          check = {
+            command = "clippy",
+            extraArgs = { "--all", "--", "-W", "clippy::pedantic" },
+          },
+        },
+      },
+
     },
     dap = {
       adapter = {
