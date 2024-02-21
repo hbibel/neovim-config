@@ -136,16 +136,4 @@ function M.scala(bufnr)
     { buffer = bufnr, desc = '[G]oto [R]eferences' })
 end
 
-function M.rust(bufnr)
-  vim.keymap.set("i", "{", function()
-    if string.match(vim.api.nvim_get_current_line(), "\"") then
-      vim.api.nvim_put({ "{" }, "c", false, true)
-    else
-      -- Put curly brace first, otherwise an infinite loop is triggered
-      vim.api.nvim_put({ "{" }, "c", true, true)
-      vim.api.nvim_input("<CR>}<Esc>O")
-    end
-  end, { buffer = bufnr })
-end
-
 return M

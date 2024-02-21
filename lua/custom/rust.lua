@@ -20,7 +20,6 @@ M.init = function()
         )
         local km = require("custom.keymaps")
         km.lsp(bufnr)
-        km.rust(bufnr)
       end,
       settings = {
         ["rust-analyzer"] = {
