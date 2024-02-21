@@ -143,8 +143,6 @@ return require('lazy').setup({
     config = function() require("dapui").setup() end
   },
 
-  { 'github/copilot.vim' },
-
   {
     "nvim-neo-tree/neo-tree.nvim",
     branch = "v3.x",
