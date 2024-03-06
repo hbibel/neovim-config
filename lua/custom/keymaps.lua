@@ -61,6 +61,8 @@ M.basic = function()
   vim.keymap.set('t', '<C-k>', [[<Cmd>wincmd k<CR>]], { buffer = 0 })
   vim.keymap.set('t', '<C-l>', [[<Cmd>wincmd l<CR>]], { buffer = 0 })
   vim.keymap.set('t', '<C-w>', [[<C-\><C-n><C-w>]], { buffer = 0 })
+
+  vim.keymap.set("n", "<leader>xq", function() vim.cmd("cclose") end, { desc = "Close Quickfix Window" })
 end
 
 function M.lsp(bufnr)
