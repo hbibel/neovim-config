@@ -1,4 +1,5 @@
-local scala = require('custom.scala')
+local scala = require("custom.scala")
+local keymaps = require("custom.keymaps")
 
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 if not vim.loop.fs_stat(lazypath) then
@@ -55,7 +56,9 @@ return require('lazy').setup({
         topdelete = { text = '‾' },
         changedelete = { text = '~' },
       },
+      on_attach = keymaps.gitsigns,
     },
+
   },
 
   { "catppuccin/nvim",       name = "catppuccin", priority = 1000 },
