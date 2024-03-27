@@ -55,7 +55,6 @@ M.basic = function()
 
   vim.keymap.set('n', '<leader>get', require('grapple').tag, { desc = '[G]rappl[e] [T]ag' })
   vim.keymap.set('n', '<leader>geu', require('grapple').untag, { desc = '[G]rappl[e] [U]ntag' })
-  vim.keymap.set('n', '<leader>geg', require('grapple').popup_tags, { desc = '[G]rappl[e] [G]o to tag' })
   -- easier navigation out of a terminal
   vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], { buffer = 0 })
   vim.keymap.set('t', '<C-h>', [[<Cmd>wincmd h<CR>]], { buffer = 0 })
