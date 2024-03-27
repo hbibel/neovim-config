@@ -26,7 +26,21 @@ local servers = {
   gopls = {
     filetypes = { "go", "gomod", },
   },
-  jedi_language_server = {},
+  pylsp = {
+    settings = {
+      pylsp = {
+        plugins = {
+          -- Using Ruff for linting and formatting, see python.lua
+          autopep8 = {
+            enabled = false,
+          },
+          pycodestyle = {
+            enabled = false,
+          },
+        },
+      },
+    },
+  },
   lua_ls = {
     Lua = {
       workspace = { checkThirdParty = false },
