@@ -17,7 +17,7 @@ return {
       }
     end
 
-    if vim.fn.filereadable("./node_modules/.bin/xo") then
+    if vim.fn.filereadable("./node_modules/.bin/xo") == 1 then
       -- Note: nvim-lint defines a function for cmd which determines whether
       -- eslint is installed globally or in node_modules, but I don't install
       -- it globally, so I don't need that.
