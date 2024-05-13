@@ -48,7 +48,17 @@ local servers = {
     },
   },
   rust_analyzer = {},
-  tsserver = {},
+  tsserver = {
+    filetypes = {
+      "javascript",
+      "javascriptreact",
+      "javascript.jsx",
+      "typescript",
+      "typescriptreact",
+      "typescript.tsx",
+      "html",
+    }
+  },
   astro = {},
   marksman = {},
 }

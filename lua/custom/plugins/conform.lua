@@ -27,6 +27,10 @@ return {
         ruff_format = {
           command = ruff_cmd,
         },
+        terraform_fmt = {
+          command = "tofu",
+          args = { "fmt", "-no-color", "-" },
+        },
       },
       formatters_by_ft = {
         lua = { "stylua" },
@@ -40,6 +44,7 @@ return {
         typescript = { "prettier" },
         typescriptreact = { "prettier" },
         astro = { "prettier" },
+        terraform = { "terraform_fmt" },
       },
     })
   end
