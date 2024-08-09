@@ -16,6 +16,7 @@ local scala = require('custom.scala')
 local rust = require('custom.rust')
 local python = require('custom.python')
 local keymaps = require('custom.keymaps')
+local helm = require("custom.helm")
 keymaps.basic()
 
 require('custom.commands').basic()
@@ -27,6 +28,7 @@ lsp.setup()
 scala.init(lsp.on_attach)
 rust.init()
 python.init(lsp.on_attach)
+helm.init()
 
 local group = vim.api.nvim_create_augroup('OverrideMelange', {})
 vim.api.nvim_create_autocmd('ColorScheme', {
