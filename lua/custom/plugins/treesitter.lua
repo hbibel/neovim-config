@@ -15,6 +15,7 @@ local setup = function()
       "astro",
       "markdown",
       "terraform",
+      "roc",
     },
 
     auto_install = false,
