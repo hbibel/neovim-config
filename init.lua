@@ -21,7 +21,6 @@ local roc = require("custom.roc")
 keymaps.basic()
 
 require('custom.commands').basic()
-require('custom.plugins.toggleterm')
 
 local lsp = require('custom.lsp')
 lsp.setup()

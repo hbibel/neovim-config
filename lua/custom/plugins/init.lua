@@ -148,18 +148,6 @@ return require('lazy').setup({
   },
 
   {
-    "nvim-neo-tree/neo-tree.nvim",
-    branch = "v3.x",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
-      "MunifTanjim/nui.nvim",
-    }
-  },
-
-  { 'akinsho/toggleterm.nvim', version = "*", config = true },
-
-  {
     "cbochs/grapple.nvim",
     dependencies = { "nvim-lua/plenary.nvim" },
   },
@@ -190,4 +178,14 @@ return require('lazy').setup({
     }
   },
 
+  {
+    "kylechui/nvim-surround",
+    version = "*",
+    event = "VeryLazy",
+    config = function()
+      require("nvim-surround").setup({
+        -- Configuration here, or leave empty to use defaults
+      })
+    end
+  }
 }, {})
