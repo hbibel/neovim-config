@@ -175,7 +175,7 @@ function M.python(bufnr)
   -- unfortunately
   vim.keymap.set('n', 'gr', vim.lsp.buf.references,
     { buffer = bufnr, desc = '[G]oto [R]eferences' })
-  vim.keymap.set("v", "<leader>F5", require('dap-python').debug_selection(),
+  vim.keymap.set("v", "<leader><F5>", require('dap-python').debug_selection,
     { buffer = bufnr, desc = "Debug selected range" })
 end
 
