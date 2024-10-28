@@ -1,6 +1,7 @@
 local on_attach = function(_, bufnr)
   local keymaps = require("custom.keymaps")
   local scala = require("custom.scala")
+  local python = require("custom.python")
   local dap = require("dap")
   local commands = require("custom.commands")
 
@@ -19,6 +20,7 @@ local on_attach = function(_, bufnr)
 
   if file_type == "python" then
     keymaps.python(bufnr)
+    python.attach_lsp()
   end
 end
 
@@ -66,7 +68,8 @@ local servers = {
     yamlls = {
       path = "yaml-language-server",
     }
-  }
+  },
+  ruff_lsp = {},
 }
 
 local setup = function()

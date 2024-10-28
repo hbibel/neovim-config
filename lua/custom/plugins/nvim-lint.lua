@@ -2,19 +2,14 @@ return {
   setup = function()
     local nvim_lint = require("lint")
 
-    if require("custom.python").venv_in_project() then
-      nvim_lint.linters.mypy.cmd = "py"
-      nvim_lint.linters.mypy.args = {
-        "-m",
-        "mypy",
-        "--show-column-numbers",
-        "--show-error-end",
-        "--hide-error-codes",
-        "--hide-error-context",
-        "--no-color-output",
-        "--no-error-summary",
-        "--no-pretty",
-      }
+    local python_linters = {}
+
+    local mypy_cmd = require("custom.python").get_mypy_command()
+    if mypy_cmd ~= nil then
+      nvim_lint.linters.mypy.cmd = mypy_cmd[1]
+      nvim_lint.linters.mypy.args = { unpack(mypy_cmd, 2) }
+
+      table.insert(python_linters, "mypy")
     end
 
     if vim.fn.filereadable("./node_modules/.bin/xo") == 1 then
@@ -32,7 +27,7 @@ return {
     end
 
     nvim_lint.linters_by_ft = {
-      python = { "mypy", },
+      python = python_linters,
       typescript = { "eslint", }
     }
 
@@ -41,5 +36,5 @@ return {
         require("lint").try_lint()
       end,
     })
-  end
+  end,
 }
