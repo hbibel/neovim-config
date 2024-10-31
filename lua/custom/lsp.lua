@@ -1,4 +1,6 @@
-local on_attach = function(_, bufnr)
+local M = {}
+
+M.on_attach = function(_, bufnr)
   local keymaps = require("custom.keymaps")
   local scala = require("custom.scala")
   local python = require("custom.python")
@@ -24,55 +26,46 @@ local on_attach = function(_, bufnr)
   end
 end
 
-local servers = {
-  gopls = {
-    filetypes = { "go", "gomod", },
-  },
-  pylsp = {
-    settings = {
-      pylsp = {
-        plugins = {
-          -- Using Ruff for linting and formatting, see python.lua
-          autopep8 = {
-            enabled = false,
-          },
-          pycodestyle = {
-            enabled = false,
-          },
-        },
+M.servers = function()
+  local python = require("custom.python")
+  return {
+    gopls = {
+      filetypes = { "go", "gomod", },
+    },
+    pylsp = {
+      settings = python.pylsp_config(),
+    },
+    lua_ls = {
+      Lua = {
+        workspace = { checkThirdParty = false },
+        telemetry = { enable = false },
       },
     },
-  },
-  lua_ls = {
-    Lua = {
-      workspace = { checkThirdParty = false },
-      telemetry = { enable = false },
+    rust_analyzer = {},
+    ts_ls = {
+      filetypes = {
+        "javascript",
+        "javascriptreact",
+        "javascript.jsx",
+        "typescript",
+        "typescriptreact",
+        "typescript.tsx",
+        "html",
+      }
     },
-  },
-  rust_analyzer = {},
-  ts_ls = {
-    filetypes = {
-      "javascript",
-      "javascriptreact",
-      "javascript.jsx",
-      "typescript",
-      "typescriptreact",
-      "typescript.tsx",
-      "html",
-    }
-  },
-  astro = {},
-  marksman = {},
-  yamlls = {},
-  helm_ls = {
-    yamlls = {
-      path = "yaml-language-server",
-    }
-  },
-  ruff_lsp = {},
-}
+    astro = {},
+    marksman = {},
+    yamlls = {},
+    helm_ls = {
+      yamlls = {
+        path = "yaml-language-server",
+      }
+    },
+    ruff_lsp = {},
+  }
+end
 
-local setup = function()
+M.setup = function()
   require("neodev").setup()
 
   -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
@@ -80,6 +73,8 @@ local setup = function()
   capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
   require("mason").setup()
+
+  local servers = M.servers()
 
   -- Ensure the servers above are installed
   local mason_lspconfig = require("mason-lspconfig")
@@ -91,7 +86,7 @@ local setup = function()
     function(server_name)
       require("lspconfig")[server_name].setup {
         capabilities = capabilities,
-        on_attach = on_attach,
+        on_attach = M.on_attach,
         settings = (servers[server_name] or {}).settings,
         filetypes = (servers[server_name] or {}).filetypes,
       }
@@ -99,7 +94,4 @@ local setup = function()
   }
 end
 
-return {
-  setup = setup,
-  on_attach = on_attach,
-}
+return M

@@ -43,6 +43,28 @@ M.get_mypy_command = function()
   return nil
 end
 
+M.pylsp_config = function()
+  local venv_dir = M.get_venv_dir()
+
+  return {
+    -- see https://github.com/python-lsp/python-lsp-server/blob/eb61ccd97bbe9c58fbde6496a78015ee3c129146/CONFIGURATION.md
+    pylsp = {
+      plugins = {
+        -- Using Ruff for linting and formatting, see python.lua
+        autopep8 = {
+          enabled = false,
+        },
+        pycodestyle = {
+          enabled = false,
+        },
+        jedi = {
+          environment = venv_dir,
+        },
+      },
+    }
+  }
+end
+
 M.init = function(on_attach)
   table.insert(require("dap").configurations.python,
     {
@@ -69,12 +91,19 @@ M.init = function(on_attach)
 end
 
 M.attach_lsp = function()
+  local venv_dir = M.get_venv_dir()
+
   if M.tools_checked == false then
     local tools = "Python setup"
     if M.get_mypy_command() ~= nil then
       tools = tools .. " ✅ type checking"
     else
       tools = tools .. " ❌ type checking"
+    end
+    if venv_dir ~= nil then
+      tools = tools .. " ✅ venv discovered"
+    else
+      tools = tools .. " ❌ no venv discovered"
     end
     vim.print(tools)
 
