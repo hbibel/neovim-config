@@ -84,7 +84,7 @@ M.init = function(on_attach)
   else
     ruff_cmd = { "ruff-lsp" }
   end
-  require("lspconfig").ruff_lsp.setup {
+  require("lspconfig").ruff.setup {
     cmd = ruff_cmd,
     on_attach = on_attach,
   }

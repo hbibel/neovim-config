@@ -61,7 +61,7 @@ M.servers = function()
         path = "yaml-language-server",
       }
     },
-    ruff_lsp = {},
+    ruff = {},
   }
 end
 
