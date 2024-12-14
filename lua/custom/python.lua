@@ -45,6 +45,11 @@ end
 
 M.pylsp_config = function()
   local venv_dir = M.get_venv_dir()
+  if venv_dir ~= nil then
+    -- Jedi does not like it if we use a relative path for an environment
+    -- created with venv (no issues with Poetry virtual environments, wtf)
+    venv_dir = vim.fn.getcwd() .. "/" .. venv_dir
+  end
 
   return {
     -- see https://github.com/python-lsp/python-lsp-server/blob/eb61ccd97bbe9c58fbde6496a78015ee3c129146/CONFIGURATION.md
@@ -80,7 +85,7 @@ M.init = function(on_attach)
 
   local ruff_cmd
   if M.venv_in_project() then
-    ruff_cmd = { "py", "-m", "ruff_lsp" }
+    ruff_cmd = { M.get_venv_dir() .. "/bin/python", "-m", "ruff_lsp" }
   else
     ruff_cmd = { "ruff-lsp" }
   end
@@ -101,7 +106,7 @@ M.attach_lsp = function()
       tools = tools .. " ❌ type checking"
     end
     if venv_dir ~= nil then
-      tools = tools .. " ✅ venv discovered"
+      tools = tools .. " ✅ venv discovered at " .. venv_dir
     else
       tools = tools .. " ❌ no venv discovered"
     end
