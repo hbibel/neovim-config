@@ -67,20 +67,20 @@ return require('lazy').setup({
   { "savq/melange-nvim" },
 
   {
-    'nvim-lualine/lualine.nvim',
+    "nvim-lualine/lualine.nvim",
     opts = {
       options = {
         icons_enabled = true,
-        component_separators = '|',
-        section_separators = '',
+        component_separators = "|",
+        section_separators = "",
       },
       sections = {
-        lualine_a = { 'mode' },
-        lualine_b = { 'branch', 'diff' },
-        lualine_c = { 'filename', scala.metals_status },
-        lualine_x = { 'filetype' },
-        lualine_y = { 'progress' },
-        lualine_z = { 'location' }
+        lualine_a = { "mode" },
+        lualine_b = { "branch", "diff" },
+        lualine_c = { "filename", scala.metals_status },
+        lualine_x = { "diagnostics", "filetype" },
+        lualine_y = { "progress" },
+        lualine_z = { "location" }
       },
     },
   },
