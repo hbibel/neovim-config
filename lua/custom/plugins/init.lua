@@ -187,5 +187,36 @@ return require('lazy').setup({
         -- Configuration here, or leave empty to use defaults
       })
     end
-  }
+  },
+
+  {
+    "yetone/avante.nvim",
+    event = "VeryLazy",
+    lazy = false,
+    version = "*",
+    opts = {
+      windows = {
+        width = 50,         -- % based on available width
+        edit = {
+          start_insert = false, -- Start insert mode when opening the edit window
+        },
+      },
+    },
+    build = "make",
+    dependencies = {
+      "stevearc/dressing.nvim",
+      "nvim-lua/plenary.nvim",
+      "MunifTanjim/nui.nvim",
+      --- The below dependencies are optional,
+      "nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
+      {
+        -- Make sure to set this up properly if you have lazy=true
+        'MeanderingProgrammer/render-markdown.nvim',
+        opts = {
+          file_types = { "markdown", "Avante" },
+        },
+        ft = { "markdown", "Avante" },
+      },
+    },
+  },
 }, {})
