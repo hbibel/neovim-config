@@ -85,12 +85,16 @@ M.setup = function()
 
   mason_lspconfig.setup_handlers {
     function(server_name)
-      require("lspconfig")[server_name].setup {
+      local args = {
         capabilities = capabilities,
         on_attach = M.on_attach,
         settings = (servers[server_name] or {}).settings,
         filetypes = (servers[server_name] or {}).filetypes,
       }
+      if servers[server_name] ~= nil and servers[server_name].cmd ~= nil then
+        args.cmd = servers[server_name].cmd
+      end
+      require("lspconfig")[server_name].setup(args)
     end
   }
 end
