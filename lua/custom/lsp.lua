@@ -35,12 +35,7 @@ M.servers = function()
     pylsp = {
       settings = python.pylsp_config(),
     },
-    lua_ls = {
-      Lua = {
-        workspace = { checkThirdParty = false },
-        telemetry = { enable = false },
-      },
-    },
+    lua_ls = {},
     rust_analyzer = {},
     ts_ls = {
       filetypes = {
@@ -57,8 +52,10 @@ M.servers = function()
     marksman = {},
     yamlls = {},
     helm_ls = {
-      yamlls = {
-        path = "yaml-language-server",
+      settings = {
+        yamlls = {
+          path = "yaml-language-server",
+        }
       }
     },
     ruff = {},
