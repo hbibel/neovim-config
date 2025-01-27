@@ -40,6 +40,9 @@ vim.api.nvim_create_autocmd('ColorScheme', {
 vim.opt.termguicolors = true
 vim.cmd.colorscheme "melange"
 
+-- avante.nvim recommends this:
+vim.opt.laststatus = 3
+
 -- import init_workspace.lua, if it exists
 pcall(require, 'init_workspace')
 
