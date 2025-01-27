@@ -6,6 +6,7 @@ local function basic()
 
   -- I can't type
   vim.cmd("command! -nargs=* W w <args>")
+  vim.cmd("command! -nargs=* Wq wq <args>")
 end
 
 local function lsp(bufnr)
