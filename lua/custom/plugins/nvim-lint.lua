@@ -12,18 +12,37 @@ return {
       table.insert(python_linters, "mypy")
     end
 
-    if vim.fn.filereadable("./node_modules/.bin/xo") == 1 then
-      -- Note: nvim-lint defines a function for cmd which determines whether
-      -- eslint is installed globally or in node_modules, but I don't install
-      -- it globally, so I don't need that.
-      nvim_lint.linters.eslint.cmd = vim.fn.fnamemodify('./node_modules/.bin/xo', ':p')
+    --- Find a binary in the node_modules of any parent of the current buffer
+    --- @param cmd string
+    --- @return string | nil
+    local function find_node_modules_binary(cmd)
+      local current_file = vim.api.nvim_buf_get_name(0)
+      local current_dir = vim.fn.fnamemodify(current_file, ":h")
+
+      while current_dir ~= "/" do
+        local binary_path = current_dir .. "/node_modules/.bin/" .. cmd
+        if vim.uv.fs_stat(binary_path) then
+          return vim.fn.fnamemodify(binary_path, ":p")
+        end
+        current_dir = vim.fn.fnamemodify(current_dir, ":h")
+      end
+      return nil
+    end
+
+    local xo_bin = find_node_modules_binary("xo")
+    if xo_bin then
+      nvim_lint.linters.eslint.cmd = xo_bin
       nvim_lint.linters.eslint.args = {
-        '--reporter',
-        'json',
-        '--stdin',
-        '--stdin-filename',
+        "--reporter",
+        "json",
+        "--stdin",
+        "--stdin-filename",
         function() return vim.api.nvim_buf_get_name(0) end,
       }
+    else
+      local binary_name = "eslint"
+      local eslint = find_node_modules_binary(binary_name)
+      nvim_lint.linters.eslint.cmd = eslint or binary_name
     end
 
     nvim_lint.linters_by_ft = {
