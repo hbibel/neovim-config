@@ -196,10 +196,16 @@ return require('lazy').setup({
     version = "*",
     opts = {
       windows = {
-        width = 50,         -- % based on available width
+        width = 50,
         edit = {
-          start_insert = false, -- Start insert mode when opening the edit window
+          start_insert = false,
         },
+        ask = {
+          start_insert = false,
+        }
+      },
+      behaviour = {
+        auto_suggestions = false,
       },
     },
     build = "make",
