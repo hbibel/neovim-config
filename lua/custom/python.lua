@@ -9,10 +9,13 @@ end
 
 ---@return string | nil
 M.get_venv_dir = function()
-  if vim.fn.isdirectory(".venv") ~= 0 then
-    return ".venv"
-  else
-    return nil
+  local utils = require("custom.utils")
+
+  local venv_parent = utils.search_upwards(function(dir)
+    return vim.fn.isdirectory(dir .. "/.venv") == 1
+  end)
+  if venv_parent ~= nil then
+    return venv_parent .. "/.venv"
   end
 end
 
@@ -85,7 +88,7 @@ M.init = function(on_attach)
 
   local ruff_cmd
   if M.venv_in_project() then
-    ruff_cmd = { M.get_venv_dir() .. "/bin/python", "-m", "ruff_lsp" }
+    ruff_cmd = { M.get_venv_dir() .. "/bin/python", "-m", "ruff", "server" }
   else
     ruff_cmd = { "ruff-lsp" }
   end
