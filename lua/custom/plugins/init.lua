@@ -1,6 +1,8 @@
 local scala = require("custom.scala")
 local keymaps = require("custom.keymaps")
 
+local snacks = require("custom.plugins.snacks")
+
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system {
@@ -99,21 +101,9 @@ return require('lazy').setup({
   { 'numToStr/Comment.nvim',     opts = {} },
 
   {
-    'nvim-telescope/telescope.nvim',
-    branch = '0.1.x',
-    dependencies = {
-      'nvim-lua/plenary.nvim',
-      {
-        'nvim-telescope/telescope-fzf-native.nvim',
-        build = 'make',
-        cond = function()
-          return vim.fn.executable 'make' == 1
-        end,
-      },
-    },
-    config = function()
-      require("custom.plugins.telescope").setup()
-    end
+    "folke/snacks.nvim",
+    opts = snacks.opts,
+    keys = snacks.keys,
   },
 
   {
