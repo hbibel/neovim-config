@@ -197,6 +197,7 @@ return require('lazy').setup({
       behaviour = {
         auto_suggestions = false,
       },
+      system_prompt = "Don't ever write code comments, unless I explicitly tell you so.",
     },
     build = "make",
     dependencies = {
