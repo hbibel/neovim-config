@@ -2,7 +2,6 @@ local M = {}
 
 M.opts = {
   picker = {},
-  explorer = {},
 }
 
 M.keys = {
